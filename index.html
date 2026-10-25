@@ -130,6 +130,28 @@ body{display:grid;place-items:center;background:radial-gradient(60% 50% at 20% 1
 .rbb>*{opacity:0;transform:translateY(12px)}
 .rb.boot .rbb>*{opacity:1;transform:none;transition:opacity 1.6s,transform 1.8s var(--spr)}
 .rb.boot .rbb>:nth-child(1){transition-delay:1.4s}.rb.boot .rbb>:nth-child(2){transition-delay:2.4s}.rb.boot .rbb>:nth-child(3){transition-delay:3.2s}
+.orb canvas{position:absolute;left:-45%;top:-45%;width:190%;height:190%;pointer-events:none;opacity:0;transition:opacity .8s;z-index:-1}
+.orb[data-s=dl] canvas{opacity:1}
+.orb .o4{stroke:rgba(255,255,255,.4);stroke-width:1.6;stroke-dasharray:1 9;opacity:0;transition:opacity .6s;transform-origin:60px 60px}
+.orb[data-s=dl] .o4,.orb[data-s=search] .o4{opacity:1;animation:rot 16s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.orb[data-s=dl] .o2{transition:none}
+.pb{width:100%;height:18px;border-radius:9px;padding:3px;margin-bottom:14px}
+.pf{display:block;position:relative;overflow:hidden;height:100%;width:0;min-width:12px;border-radius:6px;background:linear-gradient(90deg,var(--a1),var(--a2));box-shadow:0 0 16px var(--a1)}
+.pf::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.6) 50%,transparent 70%);transform:translateX(-100%);animation:shm 1.5s linear infinite}
+@keyframes shm{to{transform:translateX(100%)}}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;margin-bottom:14px}
+.tile{border-radius:22px;padding:13px 6px}.tile small{display:block;color:var(--mu);font-size:12px;margin-bottom:3px}
+.tile b{font:800 17px Manrope;font-variant-numeric:tabular-nums}
+.sd{position:relative;width:24px;height:24px;border-radius:50%;border:2px solid rgba(255,255,255,.2);flex:none;transition:border-color .4s,background .4s}
+.stp .t{opacity:.42;transition:opacity .4s}.stp .ac .t,.stp .dn .t{opacity:1}
+.stp .ac .sd{border-color:var(--a2);animation:sdp 1.1s ease-in-out infinite alternate}
+@keyframes sdp{to{box-shadow:0 0 0 6px color-mix(in srgb,var(--a1) 25%,transparent)}}
+.stp .dn .sd{border-color:transparent;background:linear-gradient(135deg,var(--a1),var(--a2));animation:pp .8s var(--bnc)}
+.stp .dn .sd::after{content:"";position:absolute;left:7px;top:2px;width:6px;height:11px;border:solid #1a0a04;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.rg{position:absolute;left:50%;top:50%;width:260px;height:260px;margin:-130px 0 0 -130px;border-radius:50%;border:1px solid color-mix(in srgb,var(--a1) 65%,transparent);opacity:0;pointer-events:none}
+.rb.boot .rg{animation:rgp 3.8s 3.4s ease-out infinite}.rb.boot .rg.r2{animation-delay:5.3s}
+@keyframes rgp{from{transform:scale(.4);opacity:.7}to{transform:scale(2.6);opacity:0}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
 </style></head><body>
 <div class="app" id="app"></div>
@@ -171,7 +193,7 @@ sound:{t:'Sons',h:()=>`<div class="h1">Sons et haptique</div><div class="grp gla
 battery:{t:'Batterie',h:()=>`<div class="h1">Batterie</div><div class="ring"><svg viewBox="0 0 200 200"><defs><linearGradient id="rg"><stop offset="0" style="stop-color:var(--a2)"/><stop offset="1" style="stop-color:var(--a1)"/></linearGradient></defs><circle class="r1" cx="100" cy="100" r="86"/><circle class="r3" cx="100" cy="100" r="86" stroke-dasharray="540.4" stroke-dashoffset="540.4"/><circle class="r2" cx="100" cy="100" r="86" stroke-dasharray="540.4" stroke-dashoffset="540.4"/></svg><div class="big"><span data-c="82">0</span><small>%</small></div></div>
 <div class="grp glass">${SW('battery','Économiseur de batterie','eco')}${R('','Santé de la batterie','96 %','','st')}${R('','Charge rapide','120 W','','st')}</div>`,
  m(el){setTimeout(()=>el.querySelectorAll('.r2,.r3').forEach(c=>c.style.strokeDashoffset=540.4*.18),380)}}};
-P.update={t:'Mises à jour',h:()=>`<div class="upd"><div class="orb" data-s="idle"><svg viewBox="0 0 120 120"><defs><linearGradient id="rg2"><stop offset="0" style="stop-color:var(--a2)"/><stop offset="1" style="stop-color:var(--a1)"/></linearGradient></defs><circle class="o1" cx="60" cy="60" r="52"/><circle class="o2" cx="60" cy="60" r="52"/><path class="ck" d="M38 62l15 15 30-34"/></svg><div class="pc"></div></div><div class="ut"></div><div class="us"></div><div class="ub"></div></div>`,
+P.update={t:'Mises à jour',h:()=>`<div class="upd"><div class="orb" data-s="idle"><canvas></canvas><svg viewBox="0 0 120 120"><defs><linearGradient id="rg2"><stop offset="0" style="stop-color:var(--a2)"/><stop offset="1" style="stop-color:var(--a1)"/></linearGradient></defs><circle class="o1" cx="60" cy="60" r="52"/><circle class="o4" cx="60" cy="60" r="61"/><circle class="o2" cx="60" cy="60" r="52"/><path class="ck" d="M38 62l15 15 30-34"/></svg><div class="pc"></div></div><div class="ut"></div><div class="us"></div><div class="ub"></div></div>`,
  m(el){const q=s=>$(s,el),orb=q('.orb'),o2=q('.o2'),pc=q('.pc'),ut=q('.ut'),us=q('.us'),ub=q('.ub');
  const CL=['Animations du système encore plus fluides','Correctifs de sécurité du mois','Autonomie améliorée en veille','Nouveau thème de couleurs','Haptique plus précis','Wi-Fi et Bluetooth plus stables','Verre liquide optimisé','Lancement des apps plus rapide'];
  const IC={r:'M21 12a9 9 0 1 1-3-6.7M21 4v5h-5',d:'M12 4v12m0 0l-5-5m5 5l5-5M5 20h14'},ico=k=>`<svg viewBox="0 0 24 24" width="46" height="46" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${IC[k]}"/></svg>`;
@@ -184,13 +206,16 @@ P.update={t:'Mises à jour',h:()=>`<div class="upd"><div class="orb" data-s="idl
   st('idle','PYROS '+nv,`${sz} Mo · mise à jour disponible`,ico('d'));hap(24);
   ub.innerHTML=`<div class="grp glass" style="width:100%;text-align:left">${L.map(x=>`<div class="row st"><span class="dot" style="background:var(--a1)"></span><span class="t">${x}</span></div>`).join('')}</div>`;
   btn('Télécharger et installer',()=>dl(nv,sz))};
- const dl=(n,sz)=>{lock=1;const T=50000+Math.random()*30000,t0=performance.now();st('dl','Téléchargement…','Garde ton appareil allumé','0%');let last=0,pv=0;
-  (function f(t){const k=Math.min((t-t0)/T,1),p=pv=Math.max(pv,Math.min(1,k+.025*Math.sin(k*20)*(1-k)));o2.style.strokeDashoffset=326.7*(1-p);
-   if(t-last>120||k>=1){last=t;pc.textContent=Math.floor(p*100)+'%';ut.textContent=p<.78?'Téléchargement…':p<.93?'Vérification…':'Préparation…';us.textContent=p<.78?`${Math.round(sz*p/.78)} Mo sur ${sz} Mo · ${Math.max(1,Math.ceil((1-k)*T/1000))} s restantes`:'Ne coupe pas ton appareil'}
-   if(k<1)requestAnimationFrame(f);else setTimeout(()=>reboot(n),700)})(t0)};
+ const dl=(n,sz)=>{lock=1;const T=50000+Math.random()*30000,t0=performance.now();st('dl','Téléchargement…','Garde ton appareil allumé','0%');
+  ub.innerHTML=`<div class="pb glass"><i class="pf"></i></div><div class="tiles"><div class="tile glass"><small>Vitesse</small><b class="sp"></b></div><div class="tile glass"><small>Reçu</small><b class="rc"></b></div><div class="tile glass"><small>Restant</small><b class="rm"></b></div></div><div class="grp glass stp" style="width:100%;text-align:left">${['Téléchargement des fichiers','Vérification de l’intégrité','Préparation de l’installation'].map(x=>`<div class="row st"><span class="sd"></span><span class="t">${x}</span></div>`).join('')}</div>`;
+  const pf=q('.pf'),sp=q('.sp'),rc=q('.rc'),rm=q('.rm'),rows=[...ub.querySelectorAll('.stp .row')];
+  const tick=(p,k)=>{const i=p<.78?0:p<.93?1:2;sp.textContent=i?'—':(sz/(T*.78/1000)*(1+.28*Math.sin(k*17)+.1*Math.sin(k*53))).toFixed(1).replace('.',',')+' Mo/s';rc.textContent=Math.round(Math.min(sz,sz*p/.78))+' Mo';rm.textContent=Math.max(1,Math.ceil((1-k)*T/1000))+' s';rows.forEach((r,j)=>{r.classList.toggle('dn',j<i);r.classList.toggle('ac',j===i)})};tick(0,0);let last=0,pv=0;
+  (function f(t){const k=Math.min((t-t0)/T,1),p=pv=Math.max(pv,Math.min(1,k+.025*Math.sin(k*20)*(1-k)));o2.style.strokeDashoffset=326.7*(1-p);pf.style.width=p*100+'%';
+   if(t-last>120||k>=1){last=t;tick(p,k);pc.textContent=Math.floor(p*100)+'%';ut.textContent=p<.78?'Téléchargement…':p<.93?'Vérification…':'Préparation…';us.textContent=p<.78?`${Math.round(sz*p/.78)} Mo sur ${sz} Mo · ${Math.max(1,Math.ceil((1-k)*T/1000))} s restantes`:'Ne coupe pas ton appareil'}
+   if(t-last<5)us.textContent=p<.93?'Garde ton appareil allumé':'Ne coupe pas ton appareil';if(k<1)requestAnimationFrame(f);else setTimeout(()=>reboot(n),700)})(t0)};
  idle()}};
 function reboot(nv){lock=1;busy=true;const B=10000+Math.random()*10000,rb=document.createElement('div');
- rb.className='rb';rb.innerHTML=`<canvas></canvas><div class="rbe">${eye}</div><div class="rbb"><div class="wm">PYROS</div><small>Powered by SHADOW</small><div class="rl"><i></i></div></div>`;
+ rb.className='rb';rb.innerHTML=`<canvas></canvas><div class="rbe"><i class="rg"></i><i class="rg r2"></i>${eye.replace(/\bir\b/g,'ir2').replace(/\blid\b/g,'lid2')}</div><div class="rbb"><div class="wm">PYROS</div><small>Powered by SHADOW</small><div class="rl"><i></i></div></div>`;
  document.body.append(rb);vib([30,70,30]);
  app.style.transition='transform 1.1s cubic-bezier(.3,.9,.3,1),opacity 1s';app.style.transform='scale(.9)';app.style.opacity=0;
  requestAnimationFrame(()=>rb.classList.add('off'));
@@ -244,7 +269,7 @@ let lk=0;addEventListener('pointermove',e=>{if(lk)return;lk=requestAnimationFram
 function look(cx,cy){document.querySelectorAll('.eye').forEach(s=>{const r=s.getBoundingClientRect(),dx=cx-(r.left+r.width/2),dy=cy-(r.top+r.height/2),d=Math.hypot(dx,dy)||1,k=Math.min(1,d/300);s.querySelector('.iris').style.transform=`translate(${dx/d*26*k}px,${dy/d*11*k}px)`})}
 addEventListener('pointerdown',()=>document.querySelectorAll('.pup').forEach(p=>p.setAttribute('rx',3)));addEventListener('pointerup',()=>document.querySelectorAll('.pup').forEach(p=>p.setAttribute('rx',7)));
 setInterval(()=>{const r=Math.random();document.querySelectorAll('.eye').forEach(s=>{s.querySelector('.iris').style.transform=`translate(${(r-.5)*40}px,${(Math.random()-.5)*14}px)`})},3200);
-setInterval(()=>document.querySelectorAll('.eye').forEach(s=>{s.classList.add('bl2');setTimeout(()=>s.classList.remove('bl2'),160)}),5200);
+setInterval(()=>document.querySelectorAll('.eye').forEach(s=>{if(s.closest('.rb'))return;s.classList.add('bl2');setTimeout(()=>s.classList.remove('bl2'),160)}),5200);
 let EC=['#ff5a1f','#ffb347'];const CVS=[];
 function embers(cv){const x=cv.getContext('2d'),o={cv,x,p:[],w:0,h:0};CVS.push(o);const rs=()=>{const d=Math.min(devicePixelRatio||1,1.5);o.w=cv.width=cv.clientWidth*d;o.h=cv.height=cv.clientHeight*d;o.d=d};rs();addEventListener('resize',rs)}
 (function loop(){requestAnimationFrame(loop);if(document.hidden||matchMedia('(prefers-reduced-motion:reduce)').matches)return;for(let i=CVS.length;i--;){const o=CVS[i];if(!o.cv.isConnected){CVS.splice(i,1);continue}const sc2=o.cv.closest('.screen');if(sc2&&sc2!==stack.at(-1))continue;const{x,p,w,h,d}=o,f=S.fl/100*(S.dragon?1.6:.6);x.clearRect(0,0,w,h);x.globalCompositeOperation='lighter';
@@ -252,4 +277,4 @@ function embers(cv){const x=cv.getContext('2d'),o={cv,x,p:[],w:0,h:0};CVS.push(o
  for(let j=p.length;j--;){const q=p[j];q.s+=.05;q.x+=q.vx+Math.sin(q.s)*.4*d;q.y+=q.vy;q.l-=.007;if(q.l<=0){p.splice(j,1);continue}const rr=q.r*q.l+.3;x.globalAlpha=q.l*.22;x.fillStyle=EC[0];x.beginPath();x.arc(q.x,q.y,rr*3.2,0,6.3);x.fill();x.globalAlpha=q.l;x.fillStyle=EC[1];x.beginPath();x.arc(q.x,q.y,rr,0,6.3);x.fill()}x.globalAlpha=1}})();
 push('home');
 </script></body></html>
-  
+ 
